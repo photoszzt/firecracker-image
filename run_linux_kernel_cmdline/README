@@ -1,0 +1,6 @@
+to add a service:
+   cp a.service /lib/systemd/system/
+   systemctl run a.service     #this only runs the service now
+   systemctl enable a.service  #doesnt run, only enables it to run on startup
+
+TODO: set up env variables at cmdline

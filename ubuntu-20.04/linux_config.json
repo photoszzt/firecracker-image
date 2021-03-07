@@ -1,0 +1,26 @@
+{
+  "boot-source": {
+    "kernel_image_path": "./output/vmlinux",
+    "boot_args": "ip=192.168.20.2::192.168.20.1:255.255.255.0:::off:128.83.120.181:: systemd.mask=systemd-networkd.service systemd.mask=systemd-networkd.socket systemd.mask=systemd-resolved.service systemd.mask=systemd-journald.service  systemd.mask=systemd-journald.socket systemd.mask=systemd-journal-flush.service systemd.mask=systemd-journald-dev-log.socket systemd.mask=systemd-udevd.service systemd.mask=systemd-udevd.socket systemd.mask=systemd-udev-trigger.service  systemd.mask=systemd-udevd-kernel.socket systemd.mask=systemd-udevd-control.socket  systemd.mask=systemd-timesyncd.service systemd.mask=systemd-update-utmp.service systemd.mask=systemd-tmpfiles-setup.service systemd.mask=systemd-tmpfiles-cleanup.service systemd.mask=systemd-tmpfiles-cleanup.timer systemd.mask=systemd-random-seed.service systemd.mask=systemd-coredump@.service systemd.mask=modprobe@drm.service systemd.mask=systemd-logind.service systemd.mask=e2scrub_reap.service systemd.unit=getty@ttyS0.service console=ttyS0 noapic reboot=k panic=1 pci=off nomodules i8042.noaux i8042.nomux i8042.nopnp i8042.dumbkbd krun=\"/bin/sh\""
+  },
+  "drives": [
+    {
+      "drive_id": "rootfs",
+      "path_on_host": "./output/image.ext4",
+      "is_root_device": true,
+      "is_read_only": false
+    }
+  ],
+  "machine-config": {
+    "vcpu_count": 1,
+    "mem_size_mib": 2304,
+    "ht_enabled": false
+  },
+  "network-interfaces": [
+    {
+      "iface_id": "eth0",
+      "guest_mac": "AA:FC:00:00:00:01",
+      "host_dev_name": "l_tap0"
+    }
+  ]
+}

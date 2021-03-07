@@ -1,0 +1,21 @@
+#!/bin/sh
+
+mount -t devtmpfs udev /dev
+mkdir /dev/pts
+mount -t devpts devpts /dev/pts
+
+mkdir /mnt/ro
+mkdir /mnt/rw
+mkdir /mnt/rootfs
+
+mount -t ext4 -o norecovery,ro /dev/vda /mnt/ro
+mount -t tmpfs root-rw /mnt/rw
+
+mkdir /mnt/rw/upper
+mkdir /mnt/rw/work
+mount -t overlay -o lowerdir=/mnt/ro,upperdir=/mnt/rw/upper,workdir=/mnt/rw/work root /mnt/rootfs
+
+umount -l /mnt/ro
+umount -l /mnt/rw
+
+mount --move /dev /mnt/rootfs/dev
