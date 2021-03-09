@@ -347,6 +347,18 @@ generate_qemu_options() {
 	# Disable Capstone
 	qemu_options+=(size:--disable-capstone)
 
+	# disable Ceph RADOS Block Device (RBD)
+	qemu_options+=(size:--disable-rbd)
+
+	# disable virtfs and related
+	qemu_options+=(size:--disable-virtfs)
+	qemu_options+=(size:--disable-attr)
+	qemu_options+=(size:--disable-cap-ng)
+	qemu_options+=(size:--disable-seccomp)
+
+	# disable libpmem
+	qemu_options+=(size:--disable-libpmem)
+
 	if [[ "${qemu_version_major}" -ge 3 ]]; then
 		# Disable graphics
 		qemu_options+=(size:--disable-virglrenderer)
@@ -395,18 +407,18 @@ generate_qemu_options() {
 		qemu_options+=(size:--enable-strip)
 	fi
 
-	# Support Ceph RADOS Block Device (RBD)
-	[ -z "${static}" ] && qemu_options+=(functionality:--enable-rbd)
+	# # Support Ceph RADOS Block Device (RBD)
+	# [ -z "${static}" ] && qemu_options+=(functionality:--enable-rbd)
 
-	# In "passthrough" security mode
-	# (-fsdev "...,security_model=passthrough,..."), qemu uses a helper
-	# application called virtfs-proxy-helper(1) to make certain 9p
-	# operations safer.
-	# seccomp required by virtiofsd
-	qemu_options+=(functionality:--enable-virtfs)
-	qemu_options+=(functionality:--enable-attr)
-	qemu_options+=(functionality:--enable-cap-ng)
-	qemu_options+=(functionality:--enable-seccomp)
+	# # In "passthrough" security mode
+	# # (-fsdev "...,security_model=passthrough,..."), qemu uses a helper
+	# # application called virtfs-proxy-helper(1) to make certain 9p
+	# # operations safer.
+	# # seccomp required by virtiofsd
+	# qemu_options+=(functionality:--enable-virtfs)
+	# qemu_options+=(functionality:--enable-attr)
+	# qemu_options+=(functionality:--enable-cap-ng)
+	# qemu_options+=(functionality:--enable-seccomp)
 
 	if [[ "${qemu_version_major}" -ge 4 || ( "${qemu_version_major}" -eq 3  &&  "${qemu_version_minor}" -ge 1 ) ]]; then
 		# AVX2 is enabled by default by x86_64, make sure it's enabled only
@@ -416,10 +428,10 @@ generate_qemu_options() {
 			if [ "${qemu_version_major}" -ge 5 ]; then
 				qemu_options+=(speed:--enable-avx512f)
 			fi
-			# According to QEMU's nvdimm documentation: When 'pmem' is 'on' and QEMU is
-			# built with libpmem support, QEMU will take necessary operations to guarantee
-			# the persistence of its own writes to the vNVDIMM backend.
-			qemu_options+=(functionality:--enable-libpmem)
+			# # According to QEMU's nvdimm documentation: When 'pmem' is 'on' and QEMU is
+			# # built with libpmem support, QEMU will take necessary operations to guarantee
+			# # the persistence of its own writes to the vNVDIMM backend.
+			# qemu_options+=(functionality:--enable-libpmem)
 		else
 			qemu_options+=(speed:--disable-avx2)
 			qemu_options+=(functionality:--disable-libpmem)

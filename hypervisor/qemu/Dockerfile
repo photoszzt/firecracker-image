@@ -62,7 +62,7 @@ RUN PREFIX="${PREFIX}" /root/configure-hypervisor.sh -s kata-qemu | xargs ./conf
 RUN make -j$(nproc)
 RUN make install DESTDIR=/tmp/qemu-static
 
-RUN make -j$(nproc) virtiofsd
-RUN chmod +x virtiofsd && mv virtiofsd "/tmp/qemu-static/${PREFIX}/bin/"
+# RUN make -j$(nproc) virtiofsd
+# RUN chmod +x virtiofsd && mv virtiofsd "/tmp/qemu-static/${PREFIX}/bin/"
 
 RUN cd /tmp/qemu-static && tar -czvf "${QEMU_TARBALL}" *

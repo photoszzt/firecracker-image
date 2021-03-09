@@ -19,11 +19,10 @@ qemu_tmp_tar="static-qemu-tmp.tar.gz"
 qemu_repo="https://gitlab.com/qemu-project/qemu.git"
 qemu_url="https://gitlab.com/qemu-project/qemu"
 qemu_version="v5.1.0"
-kata_version="${kata_version:-}"
 
 http_proxy="${http_proxy:-}"
 https_proxy="${https_proxy:-}"
-prefix="${prefix:-"/opt/kata"}"
+prefix="${prefix:-"/opt/qemu"}"
 
 sudo docker build \
 	--no-cache \
